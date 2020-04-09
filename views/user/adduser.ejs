@@ -1,0 +1,49 @@
+<%- include('../template/header'); -%>
+<div class="container">
+    <h4 class="my-3">Add <%= title %> </h4>
+    <form action="/users/create" method="post">
+        <div class="form-group">
+            <label for="inputname">Full Name</label>
+            <input type="text" class="form-control" id="inputname" name="name">
+            <% if (errors) { %>
+                <% Object.values(errors).forEach(function(error){ %>
+                    <% if (error.param == 'name') { %>
+                        <small id="emailHelp" class="form-text text-danger"><%= error.msg %></small>
+                    <% } %>
+                <% }); %>
+            <% } %>
+        </div>
+        <div class="form-group">
+            <label for="inputemail">Email address</label>
+            <input type="email" class="form-control" id="inputemail" name="email">
+            <% if (errors) { %>
+                <% Object.values(errors).forEach(function(error){ %>
+                    <% if (error.param == 'email') { %>
+                        <small id="emailHelp" class="form-text text-danger"><%= error.msg %></small>
+                    <% } %>
+                <% }); %>
+            <% } %>
+        </div>
+        <div class="form-group">
+            <label for="inputphoneno">Phone Number</label>
+            <input type="text" class="form-control" id="inputphoneno" name="phone_number">
+            <% if (errors) { %>
+                <% Object.values(errors).forEach(function(error){ %>
+                    <% if (error.param == 'phone_number') { %>
+                        <small id="emailHelp" class="form-text text-danger"><%= error.msg %></small>
+                    <% } %>
+                <% }); %>
+            <% } %>
+        </div>
+        <div class="form-group">
+            <label for="selectgender">Gender</label>
+            <select class="form-control" id="selectgender" name="gender">
+                <option>Choose Gender</option>
+                <option value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+          </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<%- include('../template/footer'); -%>

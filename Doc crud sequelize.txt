@@ -1,0 +1,67 @@
+jika belum instal sequelize generator 
+- npm i -g express-generator sequelize-clie
+buat project 
+- express crud -> (crud merupakan nama project yang akan dibuat)
+kemudian buat node module dengan
+- npm install
+
+kemuadian jalankan server dengan 
+- npm start
+
+koneksikan k Database
+pertama install sequelize dan mysql
+- npm install sequelize mysql2 --save
+kedua aktifkan config dengan
+- sequelize init
+konfigurasikan database pada folder config/ config.json
+-"development": {
+    "username": "root", /// nama user
+    "password": null, /// password
+    "database": "db_crud_node_sequelize", /// nama database 
+    "host": "127.0.0.1", /// nama host
+    "dialect": "mysql", /// database
+    "operatorsAliases": false
+  },
+
+kemudian buat database 
+- sequelize db:create
+buat model dan migrasi data
+- sequelize model:create --name users --attributes name:string,email:string,phone_number:string,gender:boolean 
+setelah membuat model dan migrasi data maka kita harus memberikan length dari setiap field dan default valuenya.
+lalu lakukan migrasi data
+-sequelize db:migrate
+coba lakukan seed data dengan
+- sequelize seed:generate --name add-data-users-seed
+kemudian lakukan configurasi data apa saja yang akan di masukan melalui seed
+lakukan seed dengan 
+- sequelize db:seed:all
+
+lakukan konfigurasi pada router users 
+
+var express = require('express');
+var router = express.Router();
+
+let {
+  viewUser,
+  actionCreate,
+  actionUpdate,
+  actionDelete,
+} = require ("../controllers/userController");
+
+router.get("/users", viewUser);
+
+kemudian melakukan konfigurasi pada controller
+nama model sesuaikan dengan const 
+- const { users } = require('../models') 
+- const Op = require("sequelize").Op;
+
+jika butuh include atau join maka 
+const include = {
+  include: [{ model: (nama model yang akan dijoin) }]
+}
+
+setelah selesai lakunkan configurasi pada controller
+pada crud
+
+
+

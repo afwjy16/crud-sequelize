@@ -1,0 +1,50 @@
+<%- include('../template/header'); -%>
+<div class="container">
+        <h4 class="my-3">Data <%= title %> </h4>
+        <!-- <% if(alert.message != '') { %>
+            <br>
+            <div class="alert alert-<%= alert.status %>" style="text-align: center;">
+              <strong><%= alert.message %></strong>
+            </div>
+        <% } %> -->
+        <a href="/users/add" class="btn btn-success float-right my-2"> Add <%= title %> </a>
+        <div class="table-responsive">
+            <table class="table table-dark ">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone no</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i = 0; i < users.length; i++ ) { %>
+                    <tr>
+                        <th scope="row"><%= i+1 %> </th>
+                        <td><%= users[i].name %> </td>
+                        <td><%= users[i].email %> </td>
+                        <td><%= users[i].phone_number %> </td>
+                        <td><%= users[i].gender %> </td>
+                        <td>
+                            <% if(users[i].status === "Active") { %>
+                                <a href="/users/status/<%= users[i].id %>" class="btn btn-success"><i class="fa fa-check"></i></a> 
+                            <% } else if(users[i].status === "Non-active") { %> 
+                                <a href="/users/status/<%= users[i].id %>" class="btn btn-danger"><i class="fa fa-times"></i></a> 
+                            <% } %> 
+                        </td>
+                        <td class="text-center">
+                            <a href="/users/edit/<%= users[i].id %>" class="btn btn-primary">Edit</a>
+                            <a href="/users/delete/<%= users[i].id %> " class="btn btn-danger button-delete">Delete</a>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+</div>
+<%- include('alert'); -%>
+<%- include('../template/footer'); -%>
